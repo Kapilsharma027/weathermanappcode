@@ -63,4 +63,13 @@
   }
   /* Modal Content/Box */
 
+
+
+.ng-star-inserted h2{color: #fff;}
+h2{color: #fff}
+.mat-tab-body-wrapper{color: #fff}
+button {background-color: #152958}
+button:hover {
+background: #1b3471;
+}
   

@@ -59,4 +59,14 @@
     padding-top: 16px;
   }
 
+  .mat-tab-label-content {
+    color: #fff;
+    font-size: 17px;
+  }
+ h3{color: #fff;}
   
+.mat-tab-body-wrapper{color: #fff}
+  button {background-color: #152958}
+  button:hover {
+  background: #1b3471;
+  }

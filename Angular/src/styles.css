@@ -88,3 +88,12 @@
   .location-icon {
     margin-left: -4px;
   }
+
+  .mat-tab-label-content {
+    color: #fff;
+    font-size: 17px;
+}
+.psw a{
+  cursor: pointer;
+  color: #fff;
+}
