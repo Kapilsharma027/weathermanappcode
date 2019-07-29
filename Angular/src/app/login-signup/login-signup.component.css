@@ -44,3 +44,15 @@ button {background-color: #152958}
 button:hover {
 background: #1b3471;
 }
+
+.login-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5% auto;
+}
+
+.mat-dialog-container {
+  background: #0036ad;
+  color: rgba(255, 255, 255, 0.87);
+}

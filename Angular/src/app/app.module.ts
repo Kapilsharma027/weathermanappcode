@@ -76,7 +76,7 @@ export function MapServiceProviderFactory() {
     AgmCoreModule.forRoot({
       // please get your own API key here:
       // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
-      apiKey: 'AIzaSyCaKfXpU2c7nas-XbGQEnix1Hk9pCWjrYQ',
+      apiKey: 'AIzaSyCSIFuXPQXel1splGkx5ElXoU1bL60Jn-I',
       libraries: ['places']
       // PPS app keys
 
