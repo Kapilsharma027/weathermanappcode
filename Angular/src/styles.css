@@ -98,3 +98,30 @@
   color: #fff;
 }
 body{background-image: url(assets/bg.png);background-size: cover;}
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  height: 37px;
+}
+button:focus{outline: none;}
+
+.mat-dialog-container {
+  background: rgb(51, 69, 148);
+  color: #fff;
+  text-align: center;
+}
+.mat-dialog-actions{
+  justify-content: center;
+}
+.mat-dialog-actions .mat-flat-button.mat-primary{
+  background-color: #8e9fff;
+  margin: 0 0 10px 0;
+}
+.mat-dialog-actions .mat-flat-button.mat-primary:hover {
+  background-color: #5e6fca;
+}

@@ -33,13 +33,15 @@
           <!-- <div class="w3-col s12" *ngFor ="let location of recentLocations">
               <mat-card>{{location?.name}}</mat-card>
             </div> -->
-            <div class="" *ngIf ="recentLocations.length > 0" >
-                <div> Recent locations</div>
-                <div class="w3-col s12 example">
-                <mat-card style="overflow-y:visible" *ngFor="let location of recentLocations.slice().reverse()">
-                    <label style= "cursor: pointer;" (click)="getLocation(location)" >
-                      <i style="font-size:15px;color:red;  margin-right: 6px;"class="fa fa-map-marker"></i>{{location?.name}}</label>
-                </mat-card>
+            <div class="recent-location" *ngIf ="recentLocations.length > 0" >
+                <div class="recent-title"> Recent locations</div>
+                <div class="recent-search-block">
+                  <div class="example">
+                    <mat-card style="overflow-y:visible" *ngFor="let location of recentLocations.slice().reverse()">
+                        <label style= "cursor: pointer;" (click)="getLocation(location)" >
+                          <i style="font-size:15px;color:red;  margin-right: 6px;"class="fa fa-map-marker"></i>{{location?.name}}</label>
+                    </mat-card>
+                  </div>
                 </div>
                 </div>
         </div>

@@ -23,7 +23,6 @@
 
   .example-stretched-tabs {
     width: 400px;
-    height: 600px
   }
 
 .w3-white{
@@ -53,6 +52,6 @@ background: #1b3471;
 }
 
 .mat-dialog-container {
-  background: #0036ad;
+  background: #76a1ff;
   color: rgba(255, 255, 255, 0.87);
 }
