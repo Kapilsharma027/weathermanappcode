@@ -90,14 +90,26 @@
   }
 
   .mat-tab-label-content {
-    color: #fff;
+    color: #ffffff;
     font-size: 17px;
 }
 .psw a{
   cursor: pointer;
-  color: #fff;
+  color: #ffffff;
 }
-body{background-image: url(assets/bg.png);background-size: cover;}
+body{
+  background-image: url(./assets/bg.png);
+  background-size: cover;
+  /* font-family: 'Montserrat' !important; */
+}
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+  z-index: -7;
+}
 /* Full-width input fields */
 input[type=text], input[type=password] {
   width: 100%;
@@ -107,21 +119,84 @@ input[type=text], input[type=password] {
   border: 1px solid #ccc;
   box-sizing: border-box;
   height: 37px;
+  border-radius: 4px;
 }
 button:focus{outline: none;}
-
-.mat-dialog-container {
-  background: rgb(51, 69, 148);
-  color: #fff;
-  text-align: center;
+button:hover {
+  background: #088ed6;
 }
+button{
+  background-color: #12c1e5;
+}
+.login-wrapper .mat-tab-body{
+  background-color: rgba(0, 0, 0, 0.21176470588235294)!important;
+}
+.login-wrapper .mat-tab-labels {
+  background-color: rgba(97, 97, 97, 0.21176470588235294)!important;
+}
+.login-wrapper .mat-tab-body button{
+  margin: 20px 0 10px;
+  border-radius: 4px;
+}
+.mat-dialog-container {
+  background: rgba(23, 22, 22, 0.98);
+  color: #ffffff;
+  text-align: center;
+  border-radius: 4px;
+}
+.mat-body p, .mat-body-1 p, .mat-typography p {
+  margin: 0 0 12px;
+  font-size: 16px;
+  text-transform: capitalize;
+}
+
 .mat-dialog-actions{
   justify-content: center;
 }
 .mat-dialog-actions .mat-flat-button.mat-primary{
-  background-color: #8e9fff;
   margin: 0 0 10px 0;
+  border-radius: 4px;
+  background-color: #12c1e5;
 }
-.mat-dialog-actions .mat-flat-button.mat-primary:hover {
-  background-color: #5e6fca;
+.mat-dialog-actions .mat-flat-button.mat-primary:hover{
+  background-color: #088ed6;
+}
+.mat-radio-button.mat-accent .mat-radio-label{display: flex !important;}
+.services-block{
+  position: relative;
+}
+.services-block .mat-radio-container {
+  position: absolute;
+  top: 107px;
+  left: 60px;
+}
+.mat-radio-button.mat-radio-disabled .mat-radio-outer-circle, .mat-radio-button.mat-radio-disabled.mat-radio-checked .mat-radio-outer-circle {
+  border-color: rgba(255, 255, 255, 0.38);
+}
+.mat-radio-outer-circle {
+  border-color: rgba(255, 255, 255, 0.54);
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: #12c1e5;
 }

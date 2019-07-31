@@ -5,7 +5,9 @@
     <div class="container">
       <div class="w3-top">
           <div class="w3-bar w3-white w3-wide w3-padding w3-card">
-            <a class="w3-bar-item">The Weather Man</a>  
+            <a class="w3-bar-item" style="padding: 0;">
+              <img class="logo" src="assets/logo.png" alt="Logo" />
+            </a>  
             <div class="w3-right w3-hide-small">
               <a class="w3-bar-item" *ngIf="showLogin">{{username}}</a>
               <button mat-raised-button *ngIf="!showLogin" (click)='openLoginSignUp()'>Login/Sign Up</button>
@@ -18,56 +20,68 @@
 
   <div class="content-wrapper">
     <div class="container">
-      <!-- <img class="w3-image" src="assets/weather.jpg" alt="Architecture" width="100%" height="100%"> -->
       <div class=" w3-row-padding  w3-display-middle search-wrapper">
-          <div class=""> <input class="w3-select w3-border" placeholder="search for location" autocorrect="off"
-              autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
-          </div>
-          <div class="">
-            <label (click)="setCurrentPosition()" matTooltip="Current location"
-              style="font-size: 30px;color: red;cursor: pointer;margin-left: -25px;"><i class="fa fa-map-marker"></i></label>
-              <!-- <mat-icon (click)="setCurrentPosition()" matTooltip="Current location" style="font-size:35px;color:red; cursor: pointer;"  class="material-icons">
-                  my_location
-                  </mat-icon> -->                
-          </div>
-          <!-- <div class="w3-col s12" *ngFor ="let location of recentLocations">
-              <mat-card>{{location?.name}}</mat-card>
-            </div> -->
-            <div class="recent-location" *ngIf ="recentLocations.length > 0" >
-                <div class="recent-title"> Recent locations</div>
-                <div class="recent-search-block">
-                  <div class="example">
-                    <mat-card style="overflow-y:visible" *ngFor="let location of recentLocations.slice().reverse()">
-                        <label style= "cursor: pointer;" (click)="getLocation(location)" >
-                          <i style="font-size:15px;color:red;  margin-right: 6px;"class="fa fa-map-marker"></i>{{location?.name}}</label>
-                    </mat-card>
-                  </div>
-                </div>
-                </div>
+        <div class=""> <input class="w3-select w3-border" placeholder="search for location" autocorrect="off"
+            autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
         </div>
-
+        <div class="">
+          <label (click)="setCurrentPosition()" matTooltip="Current location"><i class="fa fa-map-marker"></i></label>
+            <!-- <mat-icon (click)="setCurrentPosition()" matTooltip="Current location" style="font-size:35px;color:red; cursor: pointer;"  class="material-icons">
+                my_location
+                </mat-icon> -->                
+        </div>
+        <!-- <div class="w3-col s12" *ngFor ="let location of recentLocations">
+            <mat-card>{{location?.name}}</mat-card>
+          </div> -->
+      </div>
+      <div class="recent-location" *ngIf ="recentLocations.length > 0" >
+          <div class="recent-title" style="color: #fff !important;"> Recent locations</div>
+          <div class="recent-search-block">
+            <div class="example">
+              <mat-card style="overflow-y:visible" *ngFor="let location of recentLocations.slice().reverse()">
+                  <label style= "cursor: pointer;" (click)="getLocation(location)" >
+                    <i style="font-size:15px;margin-right: 6px;"class="fa fa-map-marker"></i>{{location?.name}}</label>
+              </mat-card>
+            </div>
+          </div>
+      </div>
+      <!-- Map Section Start -->
+      <div id="rcorners2" class="w3-third w3-display-topright right-map-block">
+        <!-- <div class="w3-display w3-right  w3-display-topright"> -->
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false">
+          <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.lng" [label]="m.label">
+            <!-- 
+              <agm-info-window>
+                <strong>InfoWindow content</strong>
+              </agm-info-window> -->
+          </agm-marker>
+          <!-- 
+            <agm-circle [latitude]="lat + 0.3" [longitude]="lng" [radius]="5000" [fillColor]="'red'" [circleDraggable]="true" [editable]="true">
+            </agm-circle> -->
+        </agm-map>
+      </div>
+      <!-- Map Section End -->
       <div class="w3-third w3-display-topleft left-block">
-        <section class="w3-display">
-          <h2>TheWeatherMan Analysis</h2>
-
-          <section *ngIf=" AvgProvider" class="cel-wrapper">
-              <img [matTooltip]="AvgProvider.desc" src="assets/weatherunlockImg/{{AvgProvider.icon}}"
-              style="height:80px;width:80px"><br>
-                <div class="cel-blcok">
-                  <div>
-                    <label *ngIf="AvgProvider.max_temp">{{AvgProvider.max_temp| number : '.2-2'}}°C (max)</label> <br>
-                    <label *ngIf="AvgProvider.min_temp">{{AvgProvider.min_temp| number : '.2-2'}}°C (min)</label>
-                  </div>
-                </div>
-              </section>
-            <br>
-            <section *ngIf=" AvgProvider" style="color:white;font-style: oblique" >
-                <label *ngIf="AvgProvider.humidity">Humidity :{{AvgProvider.humidity| number : '.2-2'}}</label><br>
-                <label *ngIf="AvgProvider.precip">Precipitation:{{AvgProvider.precip| number : '.2-2'}}</label><br>
-                <label *ngIf="AvgProvider.pressure">Pressure:{{AvgProvider.pressure| number : '.2-2'}}</label><br>
-                <label *ngIf="AvgProvider.windSpeed">WindSpeed:{{AvgProvider.windSpeed| number : '.2-2'}}</label><br>
-                Description:{{AvgProvider.desc}}
-            </section>
+        <section class="w3-display block-content">
+          <h3>TheWeatherMan Analysis</h3>
+          <div *ngIf=" AvgProvider" class="cel-wrapper">
+            <img [matTooltip]="AvgProvider.desc" src="assets/weatherunlockImg/{{AvgProvider.icon}}"
+            style="height:80px;width:80px"><br>
+            <div class="cel-blcok">
+              <div>
+                <label *ngIf="AvgProvider.max_temp">{{AvgProvider.max_temp| number : '.2-2'}}°C</label>
+              </div>
+            </div>
+          </div>
+          <div class="humidity-block" *ngIf=" AvgProvider">
+              <div *ngIf="AvgProvider.max_temp">{{AvgProvider.max_temp| number : '.2-2'}}°C (max)</div>
+              <div *ngIf="AvgProvider.min_temp">{{AvgProvider.min_temp| number : '.2-2'}}°C (min)</div>
+              <div *ngIf="AvgProvider.humidity"><img src="assets/icon-humidity.png" alt=""/>Humidity: <span>{{AvgProvider.humidity| number : '.2-2'}}</span></div>
+              <div *ngIf="AvgProvider.precip"><img src="assets/icon-precipitation.png" alt=""/>Precipitation: <span>{{AvgProvider.precip| number : '.2-2'}}</span></div>
+              <div *ngIf="AvgProvider.pressure"><img src="assets/icon-pressure.png" alt=""/>Pressure: <span>{{AvgProvider.pressure| number : '.2-2'}}</span></div>
+              <div *ngIf="AvgProvider.windSpeed"><img src="assets/icon-wind-speed.png" alt=""/>WindSpeed: <span>{{AvgProvider.windSpeed| number : '.2-2'}}</span></div>
+              <div><img src="assets/icon-description.png" alt=""/>Description: <span>{{AvgProvider.desc}}</span></div>
+          </div>
 
           <!-- <label *ngIf=" AvgProvider" class="w3-display-middle">
             <img [matTooltip]="AvgProvider.desc" src="assets/weatherunlockImg/{{AvgProvider.icon}}"
@@ -81,121 +95,95 @@
             Description:{{AvgProvider.desc}}
           </label> -->
         </section>
-
-
       </div>
-      <div id="rcorners2" class="w3-third w3-display-topright right-map-blcok">
-        <!-- <div class="w3-display w3-right  w3-display-topright"> -->
-        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false">
-
-          <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.lng" [label]="m.label">
-            <!-- 
-              <agm-info-window>
-                <strong>InfoWindow content</strong>
-              </agm-info-window> -->
-
-          </agm-marker>
-          <!-- 
-            <agm-circle [latitude]="lat + 0.3" [longitude]="lng" [radius]="5000" [fillColor]="'red'" [circleDraggable]="true" [editable]="true">
-            </agm-circle> -->
-
-        </agm-map>
-      </div> 
-
       <div class="w3-container w3-display-bottomleft service-block">
         <div class="w3-black">
           <h3>Service Providers</h3>
         </div>
 
         <div class=" w3-row-padding w3-section w3-stretch">
-
           <mat-radio-group aria-label="Select an option" (change)="radioChange()" [(ngModel)]="selectedProvider"
             [disabled]="showLoginButton" class="services-block-wrapper">
-
             <div class="services-block">
-              <div *ngIf="FAV_PROVIDER_ID == 5">
-                <img matTooltip="Most accurate as per users choice." class="w3-image" style="height:40px;width:40px"
-                  src="assets/fav.png" alt="Architecture">
-              </div>
-              <mat-radio-button style="color:white" value="5">
-
-                <div *ngIf="weatherInfoOpenWeather" class="divColor" id="1">
-
-                  <h3 style="color:#ffd504;font-size: 26px">
-                    Open Weather Map</h3>
+              <mat-radio-button value="5">
+                <div *ngIf="weatherInfoOpenWeather" class="divColor block-content" id="1">
+                  <h3>Open Weather Map</h3>
                   <!-- <mat-checkbox (change)=" onClick($event, id)"></mat-checkbox> -->
-
-                  <section class="cel-wrapper">
+                  <div class="cel-wrapper">
                     <img src="http://openweathermap.org/img/wn/{{weatherInfoOpenWeather?.weather[0].icon}}@2x.png"
                       style="height:80px;width:80px">
-                      <div class="cel-blcok">
-                        <div> {{weatherInfoOpenWeather?.main?.temp_max- 273| number : '.2-2'}}°C (max)
-                        <br>{{weatherInfoOpenWeather?.main?.temp_min- 273| number : '.2-2'}}°C (min)</div>
-                      </div>
-                    </section>
-                  <br>
-                  <section style="color:white;font-style: oblique">
-                    Humidity:{{weatherInfoOpenWeather?.main?.humidity}}
-                    <br>Pressure:{{weatherInfoOpenWeather?.main?.pressure}}
-                    <br>Description:{{weatherInfoOpenWeather?.weather[0]?.description}}
-                  </section>
-                </div>
-              </mat-radio-button>
-            </div>
-
-            <div class="services-block">
-              <div *ngIf="FAV_PROVIDER_ID == 2">
-                <img matTooltip="Most accurate as per users choice." class="w3-image" style="height:40px;width:40px"
-                  src="assets/fav.png" alt="Architecture">
-              </div>
-              <mat-radio-button style="color:white" value="2">
-
-                <div *ngIf="weatherInfoWeatherbit " class="divColor">
-
-                  <h3 style="color:#ffd504;font-size: 26px">Weather Bit</h3>
-                  <!-- <mat-checkbox (change)="getCheckboxes()">{{item.id}}</mat-checkbox> -->
-                  <section class="cel-wrapper">
-                    <img src="https://www.weatherbit.io/static/img/icons/{{weatherInfoWeatherbit?.weather.icon}}.png"
-                      style="height:60px;width:80px">
-                      <div class="cel-blcok">
-                        <div>{{weatherInfoWeatherbit?.app_temp}}°C (max)
-                        <br>{{weatherInfoWeatherbit?.temp}}°C (min)</div>
-                      </div>
-                  </section>
-                  <section style="color:white;font-style: oblique">
-                    Humidity:{{weatherInfoWeatherbit?.clouds}}
-                    <br>Precipitation:{{weatherInfoWeatherbit?.precip}}
-                    <br> Pressure:{{weatherInfoWeatherbit?.pres}}
-                    <br> Wind Speed:{{weatherInfoWeatherbit?.wind_spd}}
-                    <br> Description:{{weatherInfoWeatherbit?.weather?.description}}
-                  </section>
-                </div>
-              </mat-radio-button>
-            </div>
-            <div class="services-block">
-              <div *ngIf="FAV_PROVIDER_ID == 1">
-                <img matTooltip="Most accurate as per users choice." class="w3-image" style="height:40px;width:40px"
-                  src="assets/fav.png" alt="Architecture">
-              </div>
-              <mat-radio-button style="color:white" value="1">
-                <div *ngIf="weatherInfoUnlock " class="divColor">
-
-                  <h3 style="color:#ffd504;font-size: 26px">Weather Unlocked</h3>
-                  <!-- <mat-checkbox (change)="getCheckboxes()">{{item.id}}</mat-checkbox> -->
-                  <section class="cel-wrapper">
-                    <img src="assets/weatherunlockImg/{{weatherInfoUnlock?.wx_icon}}" style="height:60px;width:80px">
                     <div class="cel-blcok">
-                        <div>{{weatherInfoUnlock?.feelslike_c}}°C (max)
-                        <br>{{weatherInfoUnlock?.temp_c}}°C (min)</div>
+                      <div>
+                        <label>{{weatherInfoOpenWeather?.main?.temp_max- 273| number : '.2-2'}}°C</label>
                       </div>
-                  </section>
-                  <br>
-                  <section style="color:white;font-style: oblique">
-                    Humidity:{{weatherInfoUnlock?.humid_pct}}
-                    <br> Pressure:{{weatherInfoUnlock?.slp_mb}}
-                    <br> Wind Speed:{{weatherInfoUnlock?.windspd_mph}}
-                    <br> Description:{{weatherInfoUnlock?.wx_desc}}
-                  </section>
+                    </div>
+                    <div *ngIf="FAV_PROVIDER_ID == 5">
+                      <img matTooltip="Most accurate as per users choice." class="w3-image" src="assets/fav.png" alt="Architecture">
+                    </div>
+                  </div>
+                  <div class="humidity-block">
+                    <div>{{weatherInfoOpenWeather?.main?.temp_max- 273| number : '.2-2'}}°C (max)</div>
+                    <div>{{weatherInfoOpenWeather?.main?.temp_min- 273| number : '.2-2'}}°C (min)</div>
+                    <div><img src="assets/icon-humidity.png" alt=""/>Humidity: <span>{{weatherInfoOpenWeather?.main?.humidity}}</span></div>
+                    <div><img src="assets/icon-pressure.png" alt=""/>Pressure: <span>{{weatherInfoOpenWeather?.main?.pressure}}</span></div>
+                    <div><img src="assets/icon-description.png" alt=""/>Description: <span>{{weatherInfoOpenWeather?.weather[0]?.description}}</span></div>
+                  </div>
+                </div>
+              </mat-radio-button>
+            </div>
+            <div class="services-block">
+              <mat-radio-button value="2">
+                <div *ngIf="weatherInfoWeatherbit " class="divColor block-content">
+                  <h3>Weather Bit</h3>
+                  <!-- <mat-checkbox (change)="getCheckboxes()">{{item.id}}</mat-checkbox> -->
+                  <div class="cel-wrapper">
+                    <img src="https://www.weatherbit.io/static/img/icons/{{weatherInfoWeatherbit?.weather.icon}}.png"
+                      style="height:80px;width:80px">
+                    <div class="cel-blcok">
+                      <div>
+                        <label>{{weatherInfoWeatherbit?.app_temp}}°C</label>
+                      </div>
+                    </div>
+                    <div *ngIf="FAV_PROVIDER_ID == 2">
+                      <img matTooltip="Most accurate as per users choice." class="w3-image" src="assets/fav.png" alt="Architecture">
+                    </div>
+                  </div>
+                  <div class="humidity-block">
+                    <div>{{weatherInfoWeatherbit?.app_temp}}°C (max)</div>
+                    <div>{{weatherInfoWeatherbit?.temp}}°C (min)</div>
+                    <div><img src="assets/icon-humidity.png" alt=""/>Humidity: <span>{{weatherInfoWeatherbit?.clouds}}</span></div>
+                    <div><img src="assets/icon-precipitation.png" alt=""/>Precipitation: <span>{{weatherInfoWeatherbit?.precip}}</span></div>
+                    <div><img src="assets/icon-pressure.png" alt=""/>Pressure: <span>{{weatherInfoWeatherbit?.pres}}</span></div>
+                    <div><img src="assets/icon-wind-speed.png" alt=""/>Wind Speed: <span>{{weatherInfoWeatherbit?.wind_spd}}</span></div>
+                    <div><img src="assets/icon-description.png" alt=""/>Description: <span>{{weatherInfoWeatherbit?.weather?.description}}</span></div>
+                  </div>
+                </div>
+              </mat-radio-button>
+            </div>
+            <div class="services-block">
+              <mat-radio-button value="1">
+                <div *ngIf="weatherInfoUnlock " class="divColor block-content">
+                  <h3>Weather Unlocked</h3>
+                  <!-- <mat-checkbox (change)="getCheckboxes()">{{item.id}}</mat-checkbox> -->
+                  <div class="cel-wrapper">
+                    <img src="assets/weatherunlockImg/{{weatherInfoUnlock?.wx_icon}}" style="height:80px;width:80px">
+                    <div class="cel-blcok">
+                      <div>
+                        <label>{{weatherInfoUnlock?.feelslike_c}}°C</label>
+                      </div>
+                    </div>
+                    <div *ngIf="FAV_PROVIDER_ID == 1">
+                      <img matTooltip="Most accurate as per users choice." class="w3-image" src="assets/fav.png" alt="Architecture">
+                    </div>
+                  </div>
+                  <div class="humidity-block">
+                    <div>{{weatherInfoUnlock?.feelslike_c}}°C (max)</div>
+                    <div>{{weatherInfoUnlock?.temp_c}}°C (min)</div>
+                    <div><img src="assets/icon-humidity.png" alt=""/>Humidity: <span>{{weatherInfoUnlock?.humid_pct}}</span></div>
+                    <div><img src="assets/icon-pressure.png" alt=""/>Pressure: <span>{{weatherInfoUnlock?.slp_mb}}</span></div>
+                    <div><img src="assets/icon-wind-speed.png" alt=""/>Wind Speed: <span>{{weatherInfoUnlock?.windspd_mph}}</span></div>
+                    <div><img src="assets/icon-description.png" alt=""/>Description: <span>{{weatherInfoUnlock?.wx_desc}}</span></div>
+                  </div>
                 </div>
               </mat-radio-button>
 

@@ -10,7 +10,7 @@
  
   /* Set a style for all buttons */
   button {
-    background-color: darkgray;
+    /* background-color: darkgray; */
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -24,7 +24,7 @@
   /* Center the image and position the close button */
   .imgcontainer {
     text-align: center;
-    margin: 24px 0 12px 0;
+    margin: 40px 0 12px 0;
     position: relative;
   }
   /* .heading {
@@ -54,7 +54,3 @@
  h3{color: #fff;}
   
 .mat-tab-body-wrapper{color: #fff}
-  button {background-color: #152958}
-  button:hover {
-  background: #1b3471;
-  }
