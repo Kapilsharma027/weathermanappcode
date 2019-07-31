@@ -85,7 +85,7 @@ export class HomeComponent implements OnInit {
   loadPlaceAutoComplete() {
     this.mapsAPILoader.load().then(() => {
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
-        types: ['address']
+        types: ['geocode']
 
       });
 
@@ -104,8 +104,8 @@ export class HomeComponent implements OnInit {
           this.recentLocations.push(this.recentLocation);
           console.log(this.recentLocations);
           this.setmarker(place.geometry.location.lat(), place.geometry.location.lng(), "additional info")
-	  //          this.lat = place.geometry.location.lat();
-	  //          this.lng = place.geometry.location.lng();
+	           this.lat = place.geometry.location.lat();
+	           this.lng = place.geometry.location.lng();
 
           this.selectedCity(place.geometry.location.lat(), place.geometry.location.lng());
         });
