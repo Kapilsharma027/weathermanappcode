@@ -85,7 +85,7 @@ export class HomeComponent implements OnInit {
   loadPlaceAutoComplete() {
     this.mapsAPILoader.load().then(() => {
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
-        types: ['address']
+        types: ['geocode']
 
       });
 
@@ -104,8 +104,8 @@ export class HomeComponent implements OnInit {
           this.recentLocations.push(this.recentLocation);
           console.log(this.recentLocations);
           this.setmarker(place.geometry.location.lat(), place.geometry.location.lng(), "additional info")
-	  //          this.lat = place.geometry.location.lat();
-	  //          this.lng = place.geometry.location.lng();
+	           this.lat = place.geometry.location.lat();
+	           this.lng = place.geometry.location.lng();
 
           this.selectedCity(place.geometry.location.lat(), place.geometry.location.lng());
         });
@@ -133,15 +133,20 @@ export class HomeComponent implements OnInit {
     // this.selectedCity(location.lat , location.lng);
     // this.setmarker(location.lat, location.lng, 'initial');
     this.searchControl.setValue(location.name);
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-      // this.lat = location.lat;
-      //        this.lng = location.lng;
+        this.lat = location.lat;
+        this.lng = location.lng;
         this.selectedCity(this.lat, this.lng);
         this.setmarker(this.lat, this.lng, 'initial');
         console.log('current location', this.lat, this.lng);
-      });
-    }
+    // if ('geolocation' in navigator) {
+    //   navigator.geolocation.getCurrentPosition((position) => {
+    //   //  this.lat = location.lat;
+    //   //  this.lng = location.lng;
+    //     this.selectedCity(this.lat, this.lng);
+    //     this.setmarker(this.lat, this.lng, 'initial');
+    //     console.log('current location', this.lat, this.lng);
+    //   });
+    // }
   }
 
   selectedCity(lat, lng) {
@@ -198,8 +203,8 @@ export class HomeComponent implements OnInit {
   private setCurrentPosition() {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
-      //        this.lat = position.coords.latitude;
-      //        this.lng = position.coords.longitude;
+            //  this.lat = position.coords.latitude;
+            //  this.lng = position.coords.longitude;
         this.selectedCity(this.lat, this.lng);
         this.setmarker(this.lat, this.lng, 'initial');
         console.log('current location', this.lat, this.lng);
